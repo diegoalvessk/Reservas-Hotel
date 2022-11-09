@@ -46,6 +46,8 @@ let diaSaida = []
 let indexGeralReserva = 0
 
 let condicao = "0"
+let idComparar = 0
+let idCompararReserva = 0
 
 DesejaFazer(condicao)
 
@@ -85,13 +87,41 @@ function CadastrarReserva(){
     DesejaFazer(condicao)
 }
 
+function ExibirReservas(idComparar){
+    let variavel = 0
+    variavel = idComparar - 1
+
+    for (let index = 0; index <indexGeralHotel; index++) {
+        if(idComparar == idHotelEscolhido[index]){
+        console.log("Nome do hotel: " + nomeHotel[variavel] + ". Nome do responsável da reserva: " + nomeResponsavel[index] + ". Dia de entrada: " + diaEntrada[index] + ". Dia saída: " + diaSaida[index])
+        }        
+    }
+    DesejaFazer(condicao)
+
+}
+
+function ExibirInformacaoReserva(idCompararReserva){
+    let variavel = 0
+    let variavel2 = 0
+    variavel = idCompararReserva - 1
+    variavel2 = (idHotelEscolhido[variavel] - 1)
+
+    for (let index = 0; index <indexGeralReserva; index++) {
+        if(idCompararReserva == id[index]){
+        console.log("Nome do hotel: " + nomeHotel[variavel2] + ". Endereço: " + endereco[variavel2] + ". Dia de entrada: " + diaEntrada[index] + ". Dia saída: " + diaSaida[index])
+        }        
+    }
+    DesejaFazer(condicao)
+
+}
+
 function DesejaFazer(condicao){
 
     condicao = prompt("O que você deseja no nosso sistema?" + "\n" 
     + "1 = Cadastrar um hotel." + "\n" 
     + "2 = Realizar uma reserva." + "\n" 
-    + "3 = Excluir um cadastro." + "\n" 
-    + "4 = Finalizar programa.")
+    + "3 = Exibir reservas de um Hotel." + "\n" 
+    + "4 = Exibir informações de uma reserva.")
 
     switch (condicao) {
         case "1":
@@ -101,7 +131,32 @@ function DesejaFazer(condicao){
         case "2":
             CadastrarReserva()
             break;
-            
+
+        case "3":
+            idComparar = parseInt(prompt("Informe a id do hotel que deseja exibir as reservas."))
+            for (let index = 0; index < indexGeralHotel; index++) {
+                if(idComparar<idHotel && idComparar>0){
+                    alert("Hotel encontrado com sucesso!")
+                }else{
+                    alert("não conseguimos encontrar esse hotel em nosso sistema!")
+                    DesejaFazer(condicao)
+                }
+            }
+            ExibirReservas(idComparar)
+            break;
+
+        case "4":
+            idCompararReserva = parseInt(prompt("Informe a id da reserva que deseja exibir as informações."))
+            for (let index = 0; index < indexGeralHotel; index++) {
+                if(idCompararReserva<idReserva && idCompararReserva>0){
+                    alert("Reserva encontrado com sucesso!")
+                }else{
+                    alert("não conseguimos encontrar essa Reserva em nosso sistema!")
+                    DesejaFazer(condicao)
+                }
+           }
+           ExibirInformacaoReserva(idCompararReserva)
+                break;               
         default:
            
             break;
